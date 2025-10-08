@@ -58,3 +58,4 @@ C:\Users\TranVanDu\source\repos\ElectronicVehicleStoreBE\src\catalog-service\Cat
 C:\Users\TranVanDu\source\repos\ElectronicVehicleStoreBE\src\catalog-service\Catalog.Application\obj\Debug\net8.0\Catalog.Application.genruntimeconfig.cache
 C:\Users\TranVanDu\source\repos\ElectronicVehicleStoreBE\src\catalog-service\Catalog.Application\obj\Debug\net8.0\ref\Catalog.Application.dll
 C:\Users\TranVanDu\source\repos\ElectronicVehicleStoreBE\src\catalog-service\Catalog.Application\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\TranVanDu\source\repos\ElectronicVehicleStoreBE\src\catalog-service\Catalog.Application\obj\Debug\net8.0\Catalog.Application.sourcelink.json

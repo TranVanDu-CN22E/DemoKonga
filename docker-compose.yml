@@ -4,16 +4,19 @@ networks:
 volumes:
   pg_catalog: {}
   pg_identity: {}
-
+  pg_kong: {}
 
 services:
+  # -----------------------------
+  # CATALOG DATABASE + API
+  # -----------------------------
   catalog-db:
     image: postgres:16
     environment:
       POSTGRES_USER: ${CATALOG_DB_USER}
       POSTGRES_PASSWORD: ${CATALOG_DB_PASSWORD}
       POSTGRES_DB: ${CATALOG_DB_NAME}
-    ports: ["5434:5432"]               # connect từ host nếu cần
+    ports: ["5434:5432"]
     volumes:
       - pg_catalog:/var/lib/postgresql/data
     networks: [evnet]
@@ -28,13 +31,16 @@ services:
     depends_on:
       - catalog-db
     ports:
-      - "8102:8080"                    # bypass Kong
+      - "8102:8080"
     networks:
       evnet:
         aliases:
-          - catalog-api                # alias DNS ổn định trong mạng
-    restart: unless-stopped            # nếu lỡ crash thì tự lên lại
+          - catalog-api
+    restart: unless-stopped
 
+  # -----------------------------
+  # IDENTITY DATABASE + API
+  # -----------------------------
   identity-db:
     image: postgres:16
     environment:
@@ -42,7 +48,7 @@ services:
       POSTGRES_PASSWORD: ${IDENTITY_DB_PASSWORD}
       POSTGRES_DB: ${IDENTITY_DB_NAME}
     ports:
-      - "5435:5432"   # để connect từ host
+      - "5435:5432"
     volumes:
       - pg_identity:/var/lib/postgresql/data
     networks: [evnet]
@@ -57,20 +63,41 @@ services:
     depends_on:
       - identity-db
     ports:
-      - "8103:8080"   # bypass Kong, test trực tiếp
-    networks: [evnet]
+      - "8103:8080"
+    networks:
+      evnet:
+        aliases:
+          - identity-api
     restart: unless-stopped
 
+  # -----------------------------
+  # KONG DATABASE
+  # -----------------------------
+  kong-db:
+    image: postgres:11
+    container_name: kong-db
+    environment:
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+      POSTGRES_DB: kong
+    volumes:
+      - pg_kong:/var/lib/postgresql/data
+    networks: [evnet]
+    ports:
+      - "5436:5432"  # optional, connect if needed
 
+  # -----------------------------
+  # KONG GATEWAY (DB MODE)
+  # -----------------------------
   kong:
     image: kong:3.7
     container_name: kong
-    volumes:
-      - ./deploy/kong/kong.yaml:/usr/local/kong/declarative/kong.yaml:ro
-      - ./logs:/tmp
     environment:
-      KONG_DATABASE: "off"
-      KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yaml
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-db
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+      KONG_PG_DATABASE: kong
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
@@ -78,14 +105,20 @@ services:
       KONG_PROXY_LISTEN: 0.0.0.0:8000
       KONG_ADMIN_LISTEN: 0.0.0.0:8001
     ports:
-      - "8000:8000"   # Gateway
-      - "8001:8001"   # Admin API
+      - "8000:8000"  # Gateway
+      - "8001:8001"  # Admin API
     depends_on:
+      - kong-db
       - catalog-api
     networks:
       evnet:
         aliases:
           - kong
+    restart: unless-stopped
+
+  # -----------------------------
+  # KONGA DASHBOARD
+  # -----------------------------
   konga:
     image: pantsel/konga:latest
     restart: unless-stopped
@@ -97,4 +130,3 @@ services:
       evnet:
         aliases:
           - konga
-

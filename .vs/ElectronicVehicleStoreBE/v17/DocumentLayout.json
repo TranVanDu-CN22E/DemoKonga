@@ -35,7 +35,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Auction.Infrastructure",
+              "Title": "Auction.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\auction-service\\Auction.Infrastructure\\Auction.Infrastructure.csproj",
               "RelativeDocumentMoniker": "src\\auction-service\\Auction.Infrastructure\\Auction.Infrastructure.csproj",
               "ToolTip": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\auction-service\\Auction.Infrastructure\\Auction.Infrastructure.csproj",
@@ -48,7 +48,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Payment.Infrastructure",
+              "Title": "Payment.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\payment-service\\Payment.Infrastructure\\Payment.Infrastructure.csproj",
               "RelativeDocumentMoniker": "src\\payment-service\\Payment.Infrastructure\\Payment.Infrastructure.csproj",
               "ToolTip": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\payment-service\\Payment.Infrastructure\\Payment.Infrastructure.csproj",
@@ -61,7 +61,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Rating.Infrastructure",
+              "Title": "Rating.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\rating-service\\Rating.Infrastructure\\Rating.Infrastructure.csproj",
               "RelativeDocumentMoniker": "src\\rating-service\\Rating.Infrastructure\\Rating.Infrastructure.csproj",
               "ToolTip": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\rating-service\\Rating.Infrastructure\\Rating.Infrastructure.csproj",
@@ -74,7 +74,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Payment.API",
+              "Title": "Payment.API.csproj",
               "DocumentMoniker": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\payment-service\\Payment.API\\Payment.API.csproj",
               "RelativeDocumentMoniker": "src\\payment-service\\Payment.API\\Payment.API.csproj",
               "ToolTip": "C:\\Users\\TranVanDu\\source\\repos\\ElectronicVehicleStoreBE\\src\\payment-service\\Payment.API\\Payment.API.csproj",
